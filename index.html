@@ -6,7 +6,12 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
-  <BODY>
+  <style>
+body  {
+    background-color: lightblue;
+}
+  </style>
+  <body>
 
   <nav>
     <p style="color:white">CaliFourNia</p>
@@ -43,6 +48,15 @@
             </li>
     </ul>
   </nav>
+
+  <form action="http://www.youtube.com/results" method="get" target="_blank" >
+<input name="search_query" type="text" maxlength="128" />
+<select name="search_type">
+<option value="">Videos</option>
+<option value="search_users">Channels</option>
+</select>
+<input type="submit" value="Search" />
+</form>
 
   <p style="color:white">Welcome to my website :)</p>
   </body>
