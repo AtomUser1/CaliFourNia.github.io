@@ -49,15 +49,45 @@ body  {
     </ul>
   </nav>
 
-  <form action="http://www.youtube.com/results" method="get" target="_blank" >
-<input name="search_query" type="text" maxlength="128" />
-<select name="search_type">
-<option value="">Videos</option>
-<option value="search_users">Channels</option>
-</select>
-<input type="submit" value="Search" />
-</form>
-
   <p style="color:white">Welcome to my website :)</p>
+
+  <script type="text/javascript" src="jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+function SearchYouTube(query) {
+$.ajax({
+    url: 'http://gdata.youtube.com/feeds/mobile/videos?alt=json-in-script&q=' + query,
+    dataType: 'jsonp',
+    success: function (data) {
+        var row = "";
+        for (i = 0; i < data.feed.entry.length; i++) {
+            row += "<div class='search_item'>";
+            row += "<table width='100%'>";
+            row += "<tr>";
+            row += "<td vAlign='top' align='left'>";
+            row += "<a href='#' ><img width='120px' height='80px' src=" + data.feed.entry[i].media$group.media$thumbnail[0].url + " /></a>";
+            row += "</td>";
+            row += "<td vAlign='top' width='100%' align='left'>";
+            row += "<a href='#' ><b>" + data.feed.entry[i].media$group.media$title.$t + "</b></a><br/>";
+            row += "<span style='font-size:12px; color:#555555'>by " + data.feed.entry[i].author[0].name.$t + "</span><br/>";
+            row += "<span style='font-size:12px' color:#666666>" + data.feed.entry[i].yt$statistics.viewCount + " views" + "<span><br/>";
+            row += "</td>";
+            row += "</tr>";
+            row += "</table>";
+            row += "</div>";
+        }
+        document.getElementById("search-results-block").innerHTML = row;
+    },
+    error: function () {
+        alert("Error loading youtube video results");
+    }
+});
+return false;
+}
+</script>
+
+<input type="text" id="queryinput" />
+<input type="submit" value="Search"
+onclick="javascript:SearchYouTube(document.getElementById('queryinput').value)" />
+<div id="search-results-block"></div>
   </body>
 </html>
