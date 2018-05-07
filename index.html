@@ -155,7 +155,7 @@ video.removeAttribute("poster");
   document.addEventListener('keydown', function(e) {
     if (index) {
       var focusedElement = document.activeElement;
-      if (e.keyCode == 40 || e.keyCode == 39) { // down or right cursor
+      if (e.keyCode == 40 || e.keyCode == 50) { // down or right cursor
         var nextNode = focusedElement.nextElementSibling;
         if (nextNode) {
           nextNode.focus();
